@@ -6,12 +6,13 @@ import { AllPlayersView } from '../views';
 
 // Smart container;
 class AllPlayersContainer extends Component {
-  componentDidMount() {
-    this.props.fetchAllPlayers();
-  }
+  // componentDidMount() {
+  //   this.props.fetchAllPlayers();
+  // }
 
   render() {
-    return <AllPlayersView allPlayers={this.props.allPlayers} />
+    // return <AllPlayersView allPlayers={this.props.allPlayers} />
+    return (<div>here</div>)
   }
 }
 
