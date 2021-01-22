@@ -55,7 +55,6 @@ export const addCampus = (campus) => dispatch => {
     })
 }
 
-
 const reducer = (state=[], action) => {
   switch (action.type) {
     case FETCH_ALL_CAMPUSES:

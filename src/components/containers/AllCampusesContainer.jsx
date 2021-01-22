@@ -5,11 +5,10 @@ import { fetchAllCampusesThunk, deleteCampus, addCampus } from '../../thunks';
 import { AllCampusesView } from '../views';
 import axios from 'axios'
 
-
-// Smart container;
 class AllCampusesContainer extends Component {
   componentDidMount() {
     this.props.fetchAllCampuses();
+    console.log("asd")
   }
 
   constructor(props){
@@ -20,7 +19,6 @@ class AllCampusesContainer extends Component {
     }
   }
   
-
   handleSubmit = (event) => {
     event.preventDefault()
     this.props.addCampus(this.state)
@@ -30,18 +28,15 @@ class AllCampusesContainer extends Component {
     })
   }
 
-
-
   handleChange = (event) => { this.setState({ [event.target.name]: event.target.value }) }
   
   render() {
     return (
       <div>
-        
         <form onSubmit={this.handleSubmit} class="user-input">
         <label>
           <br />
-          Name: <input name="campusName" type="text" value={this.state.campusName} onChange={this.handleChange} required/> 
+          Campus: <input name="campusName" type="text" value={this.state.campusName} onChange={this.handleChange} required/> 
         </label>
         <label>
           Address: <input name="campusAddress" type="text" value={this.state.campusAddress} onChange={this.handleChange} required/> 
@@ -49,13 +44,13 @@ class AllCampusesContainer extends Component {
         <input class="button" type="submit" value="Add Campus" />
       </form>
       <div >
+        {console.log(this.props.allCampuses)}
         <AllCampusesView allCampuses={this.props.allCampuses} deleteCampus={this.props.deleteCampus}/>
       </div>
       </div>
     )
   }
 }
-
 
 // Map state to props;
 const mapState = state => {
