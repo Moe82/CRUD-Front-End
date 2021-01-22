@@ -9,6 +9,7 @@ const AllCampusesView = props => {
   console.log(props)
   return (
     <div className="grid">
+      {props.fetchAllCampuses}
       {props.allCampuses.map(campus => (
         <div key={campus.id}>
           <img className="defualt-icon"src="https://image.flaticon.com/icons/png/512/904/904810.png"/>

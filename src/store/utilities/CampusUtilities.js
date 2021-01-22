@@ -4,23 +4,24 @@ import axios from 'axios';
 const FETCH_ALL_CAMPUSES = "FETCH_ALL_CAMPUSES";
 const DELETE_CAMPUS = "DELETE_CAMPUS"
 const ADD_CAMPUS = "ADD_CAMPUS"
+const UPDATE_CAMPUS = "UPDATE_CAMPUS"
 
 // ACTION CREATORS;
-const fetchAllCampusesActionCreater = campuses => {
+const fetchAllCampusesActionCreator = campuses => {
   return {
     type: FETCH_ALL_CAMPUSES,
     payload: campuses.campuses
   }
 }
 
-const deleteCampusActionCreater = campusID => {
+const deleteCampusActionCreator = campusID => {
   return {
     type: DELETE_CAMPUS,
     payload: campusID
   }
 }
 
-const addCampusActionCreater = campus => {
+const addCampusActionCreator = campus => {
   console.log("HERE", campus)
   return {
     type: ADD_CAMPUS,
@@ -28,11 +29,20 @@ const addCampusActionCreater = campus => {
   }
 }
 
+const updateCampusActionCreator = campus => {
+  console.log("HERE", campus)
+  return {
+    type: UPDATE_CAMPUS,
+    payload: campus
+  }
+}
+
+
 // THUNK CREATORS;
-export const fetchAllCampusesThunk = () => dispatch => {
+export const fetchAllCampuses = () => dispatch => {
   return axios.get('http://localhost:8081/api/campuses')
     .then(res => res.data)
-    .then(campuses => dispatch(fetchAllCampusesActionCreater(campuses)))
+    .then(campuses => dispatch(fetchAllCampusesActionCreator(campuses)))
     .catch(err => console.log(err))
 }
 
@@ -42,7 +52,7 @@ export const deleteCampus = (campusID) => dispatch => {
       id: campusID
     }
   }).then( () => {
-    dispatch(deleteCampusActionCreater(campusID))
+    dispatch(deleteCampusActionCreator(campusID))
   })
 }
 
@@ -50,9 +60,18 @@ export const addCampus = (campus) => dispatch => {
   axios.post('http://localhost:8081/api/campuses', {
       name: campus.campusName,
       address: campus.campusAddress
-    }).then(res => {
-      dispatch(addCampusActionCreater(res.data))
+    }).then(response => {
+      dispatch(addCampusActionCreator(response.data))
     })
+}
+
+export const updateCampus = (campus) => dispatch => {
+  console.log(campus)
+  return axios.put('http://localhost:8081/api/campuses', {campus})
+  .then(response => {
+      dispatch(updateCampusActionCreator(response.data))
+  })
+  .catch(error => console.error(error))
 }
 
 const reducer = (state=[], action) => {
@@ -64,6 +83,8 @@ const reducer = (state=[], action) => {
       return newState
     case ADD_CAMPUS:
       return [...state, action.payload]
+    case UPDATE_CAMPUS:
+      return action.payload
     default:
       return state;
   }

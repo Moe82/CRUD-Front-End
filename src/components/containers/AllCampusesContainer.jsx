@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchAllCampusesThunk, deleteCampus, addCampus } from '../../thunks';
+import { fetchAllCampuses, deleteCampus, addCampus } from '../../thunks';
 import { AllCampusesView } from '../views';
 import axios from 'axios'
 
@@ -45,7 +45,7 @@ class AllCampusesContainer extends Component {
       </form>
       <div >
         {console.log(this.props.allCampuses)}
-        <AllCampusesView allCampuses={this.props.allCampuses} deleteCampus={this.props.deleteCampus}/>
+        <AllCampusesView allCampuses={this.props.allCampuses} deleteCampus={this.props.deleteCampus} fetchAllCampuses={this.props.fetchAllCampuses}/>
       </div>
       </div>
     )
@@ -62,7 +62,7 @@ const mapState = state => {
 // Map dispatch to props;
 const mapDispatch = dispatch => {
   return {
-    fetchAllCampuses: () => dispatch(fetchAllCampusesThunk()),
+    fetchAllCampuses: () => dispatch(fetchAllCampuses()),
     deleteCampus: (campusID) => dispatch(deleteCampus(campusID)),
     addCampus:(campus) => dispatch(addCampus(campus))
   }

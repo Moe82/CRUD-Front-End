@@ -16,6 +16,7 @@ class SingleCampusContainer extends Component {
   }
 }
 export default SingleCampusContainer
+
 //   componentDidMount() {
 //     this.props.fetchAllCampuses();
 //   }

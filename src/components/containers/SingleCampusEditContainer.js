@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // import PropTypes from 'prop-types';
 // import { connect } from 'react-redux';
-import { fetchAllCampusesThunk } from '../../thunks';
+import { fetchAllCampuses, updateCampus } from '../../thunks';
 // import { AllCampusesView } from '../views';
 
 
@@ -31,6 +31,17 @@ class SingleCampusContainerEdit extends Component {
       })
     }, 1000)
   }
+  
+  handleSubmit = (event) => {
+    event.preventDefault()
+    this.props.updateCampus({
+      name: this.state.campusName,
+      address: this.state.campusAddress,
+      img: this.state.campusImgURL,
+      info: this.state.campusInfo,
+      id: parseInt(this.props.match.params.id)
+    })
+  } 
 
   handleChange = (event) => { this.setState({ [event.target.name]: event.target.value }) }
 
@@ -71,9 +82,8 @@ const mapState = state => {
 // Map dispatch to props;
 const mapDispatch = dispatch => {
   return {
-    fetchAllCampuses: () => dispatch(fetchAllCampusesThunk()),
-    // deleteCampus: (campusID) => dispatch(deleteCampus(campusID)),
-    // addCampus:(campus) => dispatch(addCampus(campus))
+    fetchAllCampuses: () => dispatch(fetchAllCampuses()),
+    updateCampus: (campus) => dispatch(updateCampus(campus))
   }
 }
 
