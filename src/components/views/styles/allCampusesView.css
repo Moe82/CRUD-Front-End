@@ -14,7 +14,7 @@ a {
   color: #AB9DF2;
 }
 
-.wrapper {
+.grid {
   color: #AB9DF2;
   display: grid;
   grid-template-columns: repeat(4, 1fr);

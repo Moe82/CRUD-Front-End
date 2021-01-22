@@ -8,7 +8,7 @@ import { withRouter } from "react-router";
 const AllCampusesView = props => {
   console.log(props)
   return (
-    <div className="all-players">
+    <div className="grid">
       {props.allCampuses.map(campus => (
         <div key={campus.id}>
           <img className="defualt-icon"src="https://image.flaticon.com/icons/png/512/904/904810.png"/>
