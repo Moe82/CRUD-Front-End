@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchAllCampusesThunk } from '../../thunks';
+import { fetchAllCampusesThunk, deleteCampus, addCampus } from '../../thunks';
 import { AllCampusesView } from '../views';
 import axios from 'axios'
 
@@ -23,32 +23,34 @@ class AllCampusesContainer extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    axios.post('http://localhost:8081/api/campuses', {
-      name: this.state.campusName,
-      address: this.state.campusAddress
-    })
+    this.props.addCampus(this.state)
     this.setState({
       campusName: "",
       campusAddress: ""
     })
-    this.props.fetchAllCampuses();
-    this.forceUpdate()
-
   }
+
+
 
   handleChange = (event) => { this.setState({ [event.target.name]: event.target.value }) }
   
   render() {
     return (
       <div>
+        
         <form onSubmit={this.handleSubmit} class="user-input">
-        <label >
-          Name: <input name="campusName" type="text" value={this.state.campusName} onChange={this.handleChange} required/>
-          Address: <input name="campusAddress" type="text" value={this.state.campusAddress} onChange={this.handleChange} required/>
+        <label>
+          <br />
+          Name: <input name="campusName" type="text" value={this.state.campusName} onChange={this.handleChange} required/> 
+        </label>
+        <label>
+          Address: <input name="campusAddress" type="text" value={this.state.campusAddress} onChange={this.handleChange} required/> 
         </label>  
         <input class="button" type="submit" value="Add Campus" />
       </form>
-      <AllCampusesView allCampuses={this.props.allCampuses} />
+      <div >
+        <AllCampusesView allCampuses={this.props.allCampuses} deleteCampus={this.props.deleteCampus}/>
+      </div>
       </div>
     )
   }
@@ -65,7 +67,9 @@ const mapState = state => {
 // Map dispatch to props;
 const mapDispatch = dispatch => {
   return {
-    fetchAllCampuses: () => dispatch(fetchAllCampusesThunk())
+    fetchAllCampuses: () => dispatch(fetchAllCampusesThunk()),
+    deleteCampus: (campusID) => dispatch(deleteCampus(campusID)),
+    addCampus:(campus) => dispatch(addCampus(campus))
   }
 }
 

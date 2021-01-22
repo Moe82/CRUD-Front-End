@@ -1,15 +1,17 @@
 import React from 'react';
 import './styles/AllPlayersView.css';
 import PropTypes from 'prop-types';
+import './styles/allCampusesView.css';
 
 const AllCampusesView = props => {
-  console.log("HERE", props.allCampuses)
   return (
-    <div className="all-players">
+    <div className="wrapper">
       {props.allCampuses.map(campus => (
         <div key={campus.id}>
-          <h1>{campus.name}</h1>
-          <h2>{campus.address}</h2>
+          <img className="defualt-icon"src="https://image.flaticon.com/icons/png/512/904/904810.png"/>
+          <h3>{campus.name}</h3>
+          <button> edit </button>
+          <button onClick={() => {props.deleteCampus(campus.id)}}> delete </button>
         </div>
       ))}
     </div>
