@@ -7,14 +7,14 @@ const FETCH_ALL_CAMPUSES = "FETCH_ALL_CAMPUSES";
 const fetchAllCampuses = campuses => {
   return {
     type: FETCH_ALL_CAMPUSES,
-    payload: campuses
+    payload: campuses.campuses
   }
 }
 
 // THUNK CREATORS;
 export const fetchAllCampusesThunk = () => dispatch => {
   return axios
-    .get('/api/campuses')
+    .get('http://localhost:8081/api/campuses')
     .then(res => res.data)
     .then(campuses => dispatch(fetchAllCampuses(campuses)))
     .catch(err => console.log(err))

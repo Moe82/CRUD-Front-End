@@ -8,9 +8,9 @@ import axios from 'axios'
 
 // Smart container;
 class AllCampusesContainer extends Component {
-  // componentDidMount() {
-  //   this.props.fetchAllPlayers();
-  // }
+  componentDidMount() {
+    this.props.fetchAllCampuses();
+  }
 
   constructor(props){
     super(props);
@@ -23,12 +23,17 @@ class AllCampusesContainer extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    axios.post('http://localhost:8080/api/', this.state.campus)
+    axios.post('http://localhost:8081/api/campuses', {
+      name: this.state.campusName,
+      address: this.state.campusAddress
+    })
     this.setState({
       campusName: "",
       campusAddress: ""
     })
-   
+    this.props.fetchAllCampuses();
+    this.forceUpdate()
+
   }
 
   handleChange = (event) => { this.setState({ [event.target.name]: event.target.value }) }
@@ -36,17 +41,15 @@ class AllCampusesContainer extends Component {
   render() {
     return (
       <div>
-         <form onSubmit={this.handleSubmit} class="user-input">
+        <form onSubmit={this.handleSubmit} class="user-input">
         <label >
-            Name: <input name="campusName" type="text" value={this.state.campusName} onChange={this.handleChange} required/>
-            Address: <input name="campusAddress" type="text" value={this.state.campusAddress} onChange={this.handleChange} required/>
+          Name: <input name="campusName" type="text" value={this.state.campusName} onChange={this.handleChange} required/>
+          Address: <input name="campusAddress" type="text" value={this.state.campusAddress} onChange={this.handleChange} required/>
         </label>  
         <input class="button" type="submit" value="Add Campus" />
       </form>
-        
-        {/* <AllCampusesView allCampuses={this.props.allCampuses} /> */}
+      <AllCampusesView allCampuses={this.props.allCampuses} />
       </div>
-      
     )
   }
 }
