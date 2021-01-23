@@ -8,7 +8,6 @@ import { NavBarContainer } from "../containers";
 class AllStudentContainer extends Component {
   componentDidMount() {
     this.props.fetchAllStudents();
-    console.log("asd");
   }
 
   constructor(props) {
@@ -83,8 +82,6 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     fetchAllStudents: () => dispatch(fetchAllStudents()),
-    deleteStudent: (studentID) => dispatch(deleteStudent(studentID)),
-    addStudent: (student) => dispatch(addStudent(student)),
   };
 };
 
@@ -95,7 +92,4 @@ AllStudentContainer.propTypes = {
 };
 
 // Export our store-connected container by default;
-export default connect(
-  mapState,
-  mapDispatch
-)(AllStudentContainer);
+export default connect(mapState, mapDispatch)(AllStudentContainer);

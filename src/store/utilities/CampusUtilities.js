@@ -1,7 +1,10 @@
 import axios from 'axios';
 
+// DB port number
+const PORT = 8082
+
 // ACTION TYPES;
-const FETCH_ALL_CAMPUSES = "FETCH_ALL_CAMPUSES";
+const FETCH_ALL_CAMPUSES = "FETCH_ALL_CAMPUSES"
 const DELETE_CAMPUS = "DELETE_CAMPUS"
 const ADD_CAMPUS = "ADD_CAMPUS"
 const UPDATE_CAMPUS = "UPDATE_CAMPUS"
@@ -40,14 +43,14 @@ const updateCampusActionCreator = campus => {
 
 // THUNK CREATORS;
 export const fetchAllCampuses = () => dispatch => {
-  return axios.get('http://localhost:8081/api/campuses')
+  return axios.get(`http://localhost:${PORT}/api/campuses`)
     .then(res => res.data)
     .then(campuses => dispatch(fetchAllCampusesActionCreator(campuses)))
     .catch(err => console.log(err))
 }
 
 export const deleteCampus = (campusID) => dispatch => {
-  return axios.delete('http://localhost:8081/api/campuses', {
+  return axios.delete(`http://localhost:${PORT}/api/campuses`, {
     data: {
       id: campusID
     }
@@ -57,7 +60,7 @@ export const deleteCampus = (campusID) => dispatch => {
 }
 
 export const addCampus = (campus) => dispatch => {
-  axios.post('http://localhost:8081/api/campuses', {
+  axios.post(`http://localhost:${PORT}/api/campuses`, {
       name: campus.campusName,
       address: campus.campusAddress
     }).then(response => {
@@ -67,7 +70,7 @@ export const addCampus = (campus) => dispatch => {
 
 export const updateCampus = (campus) => dispatch => {
   console.log(campus)
-  return axios.put('http://localhost:8081/api/campuses', {campus})
+  return axios.put(`http://localhost:${PORT}/api/campuses`, {campus})
   .then(response => {
       dispatch(updateCampusActionCreator(response.data))
   })
