@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { fetchAllStudents } from "../../thunks";
+import { fetchAllStudents, addStudent } from "../../thunks";
 // import { AllStudentsView } from "../views";
 import { NavBarContainer } from "../containers";
 
@@ -94,4 +94,7 @@ AllStudentContainer.propTypes = {
 };
 
 // Export our store-connected container by default;
-export default connect(mapState, mapDispatch)(AllStudentContainer);
+export default connect(
+  mapState,
+  mapDispatch
+)(AllStudentContainer);
