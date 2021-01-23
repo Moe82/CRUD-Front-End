@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchAllCampuses, deleteCampus, addCampus } from '../../thunks';
 import { AllCampusesView } from '../views';
-import axios from 'axios'
+import { NavBarContainer } from '../containers'
 
 class AllCampusesContainer extends Component {
   componentDidMount() {
@@ -33,19 +33,19 @@ class AllCampusesContainer extends Component {
   render() {
     return (
       <div>
+        <NavBarContainer />
         <form onSubmit={this.handleSubmit} class="user-input">
-        <label>
-          <br />
-          Campus: <input name="campusName" type="text" value={this.state.campusName} onChange={this.handleChange} required/> 
-        </label>
-        <label>
-          Address: <input name="campusAddress" type="text" value={this.state.campusAddress} onChange={this.handleChange} required/> 
-        </label>  
-        <input class="button" type="submit" value="Add Campus" />
+          <label>
+            <br />
+            Campus: <input name="campusName" type="text" value={this.state.campusName} onChange={this.handleChange} required/> 
+          </label>
+          <label>
+            Address: <input name="campusAddress" type="text" value={this.state.campusAddress} onChange={this.handleChange} required/> 
+          </label>  
+          <input class="button" type="submit" value="Add Campus" />
       </form>
       <div >
-        {console.log(this.props.allCampuses)}
-        <AllCampusesView allCampuses={this.props.allCampuses} deleteCampus={this.props.deleteCampus} fetchAllCampuses={this.props.fetchAllCampuses}/>
+      <AllCampusesView allCampuses={this.props.allCampuses} deleteCampus={this.props.deleteCampus} fetchAllCampuses={this.props.fetchAllCampuses}/>
       </div>
       </div>
     )

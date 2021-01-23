@@ -3,4 +3,6 @@ export { default as AllPlayersContainer } from './AllPlayersContainer';
 export { default as AllCampusesContainer } from './AllCampusesContainer';
 export { default as SingleCampusContainer } from './SingleCampusContainer';
 export { default as SingleCampusContainerEdit } from './SingleCampusEditContainer';
+export { default as HomePageContainer } from './HomePageContainer' ;
+export { default as NavBarContainer } from './NavBarContainer' ;
 
