@@ -1,29 +1,29 @@
 import axios from 'axios';
 
 // ACTION TYPES;
-const FETCH_ALL_PLAYERS = "FETCH_ALL_PLAYERS";
+const FETCH_ALL_STUDENTS = "FETCH_ALL_STUDENTS";
 
 // ACTION CREATORS;
-const fetchAllPlayers = players => {
+const fetchAllStudentsActionCreator = student => {
   return {
-    type: FETCH_ALL_PLAYERS,
-    payload: players
+    type: FETCH_ALL_STUDENTS,
+    payload: student
   }
 }
 
 // THUNK CREATORS;
-export const fetchAllPlayersThunk = () => dispatch => {
+export const fetchAllStudents = () => dispatch => {
   return axios
     .get('/api/players')
     .then(res => res.data)
-    .then(players => dispatch(fetchAllPlayers(players)))
+    .then(students => dispatch(fetchAllStudentsActionCreator(students)))
     .catch(err => console.log(err))
 }
 
 // REDUCER;
 const reducer = (state = [], action) => {
   switch (action.type) {
-    case FETCH_ALL_PLAYERS:
+    case FETCH_ALL_STUDENTS:
       return action.payload;
     default:
       return state;

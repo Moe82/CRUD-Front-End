@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { fetchAllStudents, deleteStudent, addStudent } from "../../thunks";
-import { AllStudentsView } from "../views";
+import { fetchAllStudents } from "../../thunks";
+// import { AllStudentsView } from "../views";
 import { NavBarContainer } from "../containers";
 
 class AllStudentContainer extends Component {
   componentDidMount() {
     this.props.fetchAllStudents();
-    console.log("asd");
   }
 
   constructor(props) {
@@ -61,11 +60,11 @@ class AllStudentContainer extends Component {
           <input class="button" type="submit" value="Add Student" />
         </form>
         <div>
-          <AllStudentsView
+          {/* <AllStudentsView
             allStudent={this.props.allStudent}
             deleteStudent={this.props.deleteStudent}
             fetchAllStudents={this.props.fetchAllStudents}
-          />
+          /> */}
         </div>
       </div>
     );
@@ -83,19 +82,16 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     fetchAllStudents: () => dispatch(fetchAllStudents()),
-    deleteStudent: (studentID) => dispatch(deleteStudent(studentID)),
-    addStudent: (student) => dispatch(addStudent(student)),
+    // deleteStudent: (studentID) => dispatch(deleteStudent(studentID)),
+    // addStudent: (student) => dispatch(addStudent(student)),
   };
 };
 
 // Type check props;
 AllStudentContainer.propTypes = {
-  addStudent: PropTypes.array.isRequired,
+  // addStudent: PropTypes.array.isRequired,
   fetchAllStudents: PropTypes.func.isRequired,
 };
 
 // Export our store-connected container by default;
-export default connect(
-  mapState,
-  mapDispatch
-)(AllStudentContainer);
+export default connect(mapState, mapDispatch)(AllStudentContainer);

@@ -8,7 +8,6 @@ import { NavBarContainer } from '../containers'
 class AllCampusesContainer extends Component {
   componentDidMount() {
     this.props.fetchAllCampuses();
-    console.log("asd")
   }
 
   constructor(props){

@@ -4,7 +4,6 @@ import './styles/allCampusesView.css';
 import { withRouter } from "react-router";
 
 const AllCampusesView = props => {
-  console.log(props)
   return (
     <div className="grid">
       {props.fetchAllCampuses}
