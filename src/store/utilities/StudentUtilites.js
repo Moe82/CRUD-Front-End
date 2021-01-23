@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // local backend server port number
-const PORT = 8084;
+const PORT = 8086;
 
 // ACTION TYPES;
 const FETCH_ALL_STUDENTS = "FETCH_ALL_STUDENTS";
@@ -22,6 +22,8 @@ const addStudentActionCreator = (student) => {
   };
 };
 
+
+
 // THUNK CREATORS;
 export const fetchAllStudents = () => (dispatch) => {
   return axios
@@ -32,15 +34,16 @@ export const fetchAllStudents = () => (dispatch) => {
 };
 
 export const addStudent = (student) => (dispatch) => {
-  axios
-    .post(`http://localhost:${PORT}/api/students`, {
+  axios.post(`http://localhost:${PORT}/api/students`, {
       firstName: student.studentFirstName,
       lastName: student.studentLastName,
-      gpa: student.studentGpa,
-      email: student.studentEmail,
+      gpa: 3.0,
+      email: "asd"
     })
     .then((response) => {
       dispatch(addStudentActionCreator(response.data));
+    }).catch((err) => {
+      console.log(err);
     });
 };
 

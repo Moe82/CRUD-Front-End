@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { fetchAllStudents, addStudent } from "../../thunks";
-// import { AllStudentsView } from "../views";
+import { AllStudentsView } from "../views";
 import { NavBarContainer } from "../containers";
 
 class AllStudentContainer extends Component {
@@ -83,7 +83,7 @@ const mapDispatch = (dispatch) => {
   return {
     fetchAllStudents: () => dispatch(fetchAllStudents()),
     // deleteStudent: (studentID) => dispatch(deleteStudent(studentID)),
-    // addStudent: (student) => dispatch(addStudent(student)),
+    addStudent: (student) => dispatch(addStudent(student)),
   };
 };
 

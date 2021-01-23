@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // local backend server port number
-const PORT = 8084;
+const PORT = 8086;
 
 // ACTION TYPES;
 const FETCH_ALL_CAMPUSES = "FETCH_ALL_CAMPUSES";
@@ -67,6 +67,7 @@ export const addCampus = (campus) => (dispatch) => {
       address: campus.campusAddress,
     })
     .then((response) => {
+      console.log("HERE",response)
       dispatch(addCampusActionCreator(response.data));
     })
     .catch((err) => {
