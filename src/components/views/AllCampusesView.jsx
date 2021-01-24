@@ -11,7 +11,7 @@ const AllCampusesView = props => {
         <div key={campus.id}>
           <img className="defualt-icon" src={campus.img} onClick={() => { props.history.push(`/campuses/${campus.id}`) }} />
           <h3 onClick={() => { props.history.push(`/campuses/${campus.id}`) }}>{campus.name}</h3>
-          Students enrolled: {campus.students.length} <br />
+          Students enrolled: {campus.hasOwnProperty("students") === false ? 0 : campus.students.length } <br />
           <button onClick={() => {props.deleteCampus(campus.id)}}> delete </button>
           <button onClick={() => { props.history.push(`/campuses/${campus.id}/edit`) }}>edit</button>
         </div>

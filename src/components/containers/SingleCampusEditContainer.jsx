@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // import PropTypes from 'prop-types';
 // import { connect } from 'react-redux';
-import { fetchAllCampuses, updateCampus } from '../../thunks';
-// import { AllCampusesView } from '../views';
+import { fetchAllCampuses, updateCampus, fetchAllStudents, updateStudent } from '../../thunks';
+import { NavBarContainer } from "../containers";
+/* import {SingleCampusEditView }from '../views' */
 
 
 class SingleCampusContainerEdit extends Component {
@@ -13,21 +14,23 @@ class SingleCampusContainerEdit extends Component {
       campusName: "",
       campusAddress: "",
       campusImgURL: "",
-      campusInfo: ""
+      campusInfo: "",
+      numberOfStudents: 0,
+      studentId: ""
     }
   }
 
   // ask Bashir about the setTimeout method. 
   componentDidMount = () => {
     this.props.fetchAllCampuses()
+    this.props.fetchAllStudents()
     setTimeout( () => {
       let thisCampus = this.props.allCampuses.find(campus => campus.id == this.props.match.params.id)
-      console.log("Here", thisCampus)
       this.setState({
         campusName: thisCampus.name,
         campusAddress: thisCampus.address,
         campusImgURL: thisCampus.img,
-        campusInfo: thisCampus.info
+        campusInfo: thisCampus.info, 
       })
     }, 1000)
   }
@@ -43,11 +46,21 @@ class SingleCampusContainerEdit extends Component {
     })
   } 
 
+  handleAddStudent = (event) => {
+    event.preventDefault()
+    this.props.updateStudent({
+      campusId : parseInt(this.props.match.params.id),
+      studentId : this.state.studentId
+    })
+  } 
+
   handleChange = (event) => { this.setState({ [event.target.name]: event.target.value }) }
 
   render(){
     return (
       <div>
+        <h1>Edit Campus</h1>
+        <NavBarContainer/>
         <form onSubmit={this.handleSubmit} class="user-input">
           <label> 
             Campus Name: <input name="campusName" type="text" value={this.state.campusName} onChange={this.handleChange} required/> 
@@ -67,6 +80,23 @@ class SingleCampusContainerEdit extends Component {
             <br />
           <input class="button" type="submit" value="Save changes" />
         </form>
+        <br/>
+        <br/>
+        {/* <select name='language' value={this.state.language} onChange={this.handleChange}></select> */}
+        <form onSubmit={this.handleAddStudent} class="user-input">
+          <select name='studentId' value={this.state.studentId} onChange={this.handleChange}>
+            {this.props.allStudents.map(student => {
+              return (<option value={student.id}> {student.firstName} {student.lastName} </option>)
+            })}
+          </select> 
+          <input class="button" type="submit" value="Add Student" />
+        </form>
+        <div>
+        </div>
+        
+        <br/>
+        {(this.state.numberOfStudents === 0)? <div>There are no student currently registered to this campus.</div> :
+        <div>There are {this.state.numberOfStudents} in this campus.</div>}
       </div>
     )
   }
@@ -75,15 +105,18 @@ class SingleCampusContainerEdit extends Component {
 // Map state to props;
 const mapState = state => {
   return {
-    allCampuses: state.allCampuses
+    allCampuses: state.allCampuses,
+    allStudents: state.allStudents
   }
 }
 
 // Map dispatch to props;
 const mapDispatch = dispatch => {
   return {
+    fetchAllStudents: () => dispatch(fetchAllStudents()),
     fetchAllCampuses: () => dispatch(fetchAllCampuses()),
-    updateCampus: (campus) => dispatch(updateCampus(campus))
+    updateCampus: (campus) => dispatch(updateCampus(campus)),
+    updateStudent: (student) => dispatch(updateStudent(student))
   }
 }
 

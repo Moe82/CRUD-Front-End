@@ -3,10 +3,14 @@ import PropTypes from 'prop-types';
 import { withRouter } from "react-router";
 import './styles/allCampusesView.css';
 import studentIcon from '../../assets/student.png'
+
 const AllStudentsView = props => {
   return (
     <div className="grid">
-      {props.allStudents.map(student => (
+      {console.log("HERE2", props.allStudents)}
+      {console.log("HERE", props.allStudents.length)}
+    
+      {(props.allStudents.length != 0) && props.allStudents.map(student => (
         <div >
           <img className="defualt-icon" src={student.img == "" ? studentIcon : ""}/>
           <h3 onClick={() => { props.history.push(`/students/${student.id}`) }}>{student.firstName}{student.lastName}</h3>

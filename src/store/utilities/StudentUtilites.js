@@ -1,12 +1,14 @@
 import axios from "axios";
 
 // local backend server port number
-const PORT = 8085;
+const PORT = 8090;
+
 
 // ACTION TYPES;
 const FETCH_ALL_STUDENTS = "FETCH_ALL_STUDENTS";
 const ADD_STUDENT = "ADD_STUDENT";
 const DELETE_STUDENT = "DELETE_STUDENT"
+const UPDATE_STUDENT = "UPDATE_STUDENT"
 
 // ACTION CREATORS;
 const fetchAllStudentsActionCreator = (students) => {
@@ -29,6 +31,12 @@ const deleteStudentActionCreator = (studentID) => {
     payload: studentID,
   };
 };
+const updateStudentActionCreator = (student) => {
+  return {
+    type: UPDATE_STUDENT,
+    payload: student,
+  };
+}
 
 
 
@@ -68,6 +76,17 @@ export const deleteStudent = (studentID) => (dispatch) => {
       dispatch(deleteStudentActionCreator(studentID));
     }).catch((err) => console.log(err));
 };
+
+export const updateStudent = (student) => (dispatch) => {
+  console.log("__________", student)
+  return axios
+    .put(`http://localhost:${PORT}/api/students`, { student })
+    .then((response) => {
+      dispatch(updateStudentActionCreator(response.data));
+    })
+    .catch((error) => console.error(error));
+};
+
 
 // REDUCER;
 const reducer = (state = [], action) => {

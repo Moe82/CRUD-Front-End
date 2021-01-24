@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // local backend server port number
-const PORT = 8085;
+const PORT = 8090;
 
 // ACTION TYPES;
 const FETCH_ALL_CAMPUSES = "FETCH_ALL_CAMPUSES";
@@ -26,9 +26,10 @@ const deleteCampusActionCreator = (campusID) => {
 };
 
 const addCampusActionCreator = (campus) => {
+  campus.students = []
   return {
     type: ADD_CAMPUS,
-    payload: campus,
+    payload: campus, 
   };
 };
 
