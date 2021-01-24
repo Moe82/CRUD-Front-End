@@ -50,7 +50,7 @@ class AllStudentContainer extends Component {
             Emai: <input name="studentEmail" type="email" value={this.state.studentEmail} onChange={this.handleChange} required/>
           </label> 
           <label> 
-            GPA: <input name="studentGpa" type="number" value={this.state.studentGpa} onChange={this.handleChange} required/>
+            GPA: <input step=".01" min="0" max="4" name="studentGpa" type="number" value={this.state.studentGpa} onChange={this.handleChange} required/>
           </label><br/><br /> 
           <input class="button" type="submit" value="Add Student" />
         </form>

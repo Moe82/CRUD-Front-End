@@ -8,10 +8,10 @@ const AllStudentsView = props => {
     <div className="grid">
       {props.allStudents.map(student => (
         <div >
-          <img className="defualt-icon"src={student.img != "" ? studentIcon : ""}/>
+          <img className="defualt-icon" src={student.img == "" ? studentIcon : ""}/>
           <h3 onClick={() => { props.history.push(`/students/${student.id}`) }}>{student.firstName}{student.lastName}</h3>
           <button onClick={() => {props.deleteStudent(student.id)}}> delete </button>
-          {/* <button onClick={() => { props.history.push(`/campuses/${campus.id}/edit`) }}>edit</button> */}
+          <button onClick={() => { props.history.push(`/student/${student.id}/edit`) }}>edit</button>
         </div>
       ))}
     </div>

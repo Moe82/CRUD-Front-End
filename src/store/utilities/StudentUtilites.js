@@ -46,7 +46,7 @@ export const addStudent = (student) => (dispatch) => {
   axios.post(`http://localhost:${PORT}/api/students`, {
       firstName: student.studentFirstName,
       lastName: student.studentLastName,
-      email: student.studentLastName,
+      email: student.studentEmail,
       gpa: student.studentGpa,
       img: ""
     })
@@ -58,15 +58,15 @@ export const addStudent = (student) => (dispatch) => {
 };
 
 export const deleteStudent = (studentID) => (dispatch) => {
-  return axios
-    .delete(`http://localhost:${PORT}/api/students`, {
+  console.log(studentID)
+  return axios.delete(`http://localhost:${PORT}/api/students`, {
       data: {
         id: studentID,
       },
     })
     .then(() => {
       dispatch(deleteStudentActionCreator(studentID));
-    });
+    }).catch((err) => console.log(err));
 };
 
 // REDUCER;
@@ -76,6 +76,9 @@ const reducer = (state = [], action) => {
       return action.payload;
     case ADD_STUDENT:
       return [...state, action.payload];
+    case DELETE_STUDENT:
+      let newState = state.filter((student) => student.id != action.payload);
+      return newState
     default:
       return state;
   }
