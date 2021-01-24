@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // local backend server port number
-const PORT = 8086;
+const PORT = 8085;
 
 // ACTION TYPES;
 const FETCH_ALL_CAMPUSES = "FETCH_ALL_CAMPUSES";
@@ -65,9 +65,9 @@ export const addCampus = (campus) => (dispatch) => {
     .post(`http://localhost:${PORT}/api/campuses`, {
       name: campus.campusName,
       address: campus.campusAddress,
+      img: "https://image.flaticon.com/icons/png/512/904/904810.png"
     })
     .then((response) => {
-      console.log("HERE",response)
       dispatch(addCampusActionCreator(response.data));
     })
     .catch((err) => {
