@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // local backend server port number
-const PORT = 8085
+const PORT = 8086
 
 // ACTION TYPES;
 const FETCH_ALL_STUDENTS = "FETCH_ALL_STUDENTS";
