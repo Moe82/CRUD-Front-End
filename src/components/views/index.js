@@ -2,3 +2,4 @@
 export { default as AllCampusesView } from './AllCampusesView';
 export { default as HomePageView } from './HomePageView';
 export { default as NavBarView } from './NavBarView';
+export { default as SingleCampusEditView } from './SingleCampusEditView';

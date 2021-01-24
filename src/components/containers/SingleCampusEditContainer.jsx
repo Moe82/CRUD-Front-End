@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 // import PropTypes from 'prop-types';
 // import { connect } from 'react-redux';
 import { fetchAllCampuses, updateCampus } from '../../thunks';
-// import { AllCampusesView } from '../views';
+import { NavBarContainer } from "../containers";
+/* import {SingleCampusEditView }from '../views' */
 
 
 class SingleCampusContainerEdit extends Component {
@@ -13,7 +14,8 @@ class SingleCampusContainerEdit extends Component {
       campusName: "",
       campusAddress: "",
       campusImgURL: "",
-      campusInfo: ""
+      campusInfo: "",
+      numberOfStudents:0
     }
   }
 
@@ -48,6 +50,8 @@ class SingleCampusContainerEdit extends Component {
   render(){
     return (
       <div>
+        <h1>Edit Campus</h1>
+        <NavBarContainer/>
         <form onSubmit={this.handleSubmit} class="user-input">
           <label> 
             Campus Name: <input name="campusName" type="text" value={this.state.campusName} onChange={this.handleChange} required/> 
@@ -67,6 +71,17 @@ class SingleCampusContainerEdit extends Component {
             <br />
           <input class="button" type="submit" value="Save changes" />
         </form>
+        <br/>
+        <br/>
+        <div>Students on Campus</div>
+        <div>
+        <button>Select Student...</button>
+        <button>Add to Campus</button>
+        </div>
+        
+        <br/>
+        {(this.state.numberOfStudents === 0)? <div>There are no student currently registered to this campus.</div> :
+        <div>There are {this.state.numberOfStudents} in this campus.</div>}
       </div>
     )
   }
