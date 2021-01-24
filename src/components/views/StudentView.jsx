@@ -6,7 +6,7 @@ const studentView = props => {
   return (
     <div >
       <img className="defualt-icon" src={props.student.img == "" ? studentIcon : ""}/>
-      {props.student.firstName}
+      {props.student.firstName} {props.student.lastName} 
       Student ID: {props.student.id}
       {/* <h3 onClick={() => { props.history.push(`/students/${student.id}`) }}>{student.firstName}{student.lastName}</h3>
       <button onClick={() => {props.deleteStudent(student.id)}}> delete </button>
