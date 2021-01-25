@@ -1,7 +1,6 @@
 import axios from "axios";
 
-// local backend server port number
-const PORT = 8090
+const db_server = "http://ttp-crud-app-backend.herokuapp.com"
 
 // ACTION TYPES;
 const FETCH_ALL_CAMPUSES = "FETCH_ALL_CAMPUSES";
@@ -26,6 +25,7 @@ const deleteCampusActionCreator = (campusID) => {
 };
 
 const addCampusActionCreator = (campus) => {
+  
   campus.students = []
   return {
     type: ADD_CAMPUS,
@@ -36,14 +36,14 @@ const addCampusActionCreator = (campus) => {
 const updateCampusActionCreator = (campus) => {
   return {
     type: UPDATE_CAMPUS,
-    payload: campus,
+    payload: campus.campuses,
   };
 };
 
 // THUNK CREATORS;
 export const fetchAllCampuses = () => (dispatch) => {
   return axios
-    .get(`http://localhost:${PORT}/api/campuses`)
+    .get(`${db_server}/api/campuses`)
     .then((res) => res.data)
     .then((campuses) => dispatch(fetchAllCampusesActionCreator(campuses)))
     .catch((err) => console.log(err));
@@ -51,7 +51,7 @@ export const fetchAllCampuses = () => (dispatch) => {
 
 export const deleteCampus = (campusID) => (dispatch) => {
   return axios
-    .delete(`http://localhost:${PORT}/api/campuses`, {
+    .delete(`${db_server}/api/campuses`, {
       data: {
         id: campusID,
       },
@@ -64,7 +64,7 @@ export const deleteCampus = (campusID) => (dispatch) => {
 export const addCampus = (campus) => (dispatch) => {
   console.log(campus);
   axios
-    .post(`http://localhost:${PORT}/api/campuses`, {
+    .post(`${db_server}/api/campuses`, {
       name: campus.campusName,
       address: campus.campusAddress,
       img: "https://image.flaticon.com/icons/png/512/904/904810.png"
@@ -79,7 +79,7 @@ export const addCampus = (campus) => (dispatch) => {
 
 export const updateCampus = (campus) => (dispatch) => {
   return axios
-    .put(`http://localhost:${PORT}/api/campuses`, { campus })
+    .put(`${db_server}/api/campuses`, { campus })
     .then((response) => {
       dispatch(updateCampusActionCreator(response.data));
     })
