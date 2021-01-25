@@ -4,6 +4,7 @@ import AllStudentsView from "../views/AllStudentsView";
 import { StudentView } from "../views";
 import { connect } from 'react-redux';
 import { fetchAllCampuses, deleteCampus, addCampus } from '../../thunks';
+import '../views/styles/allCampusesView.css';
 
 class SingleCampusContainer extends Component {
  
@@ -20,14 +21,21 @@ class SingleCampusContainer extends Component {
     return (
       <div>
         <NavBarView />
-        <h1>{this.props.campus.name}</h1>
-        <img src={this.props.campus.img} />
-        {console.log("___________", this.props.campus)}
-        {this.props.campus.info}
-        {this.props.campus.address}
+       
+        <img src={this.props.campus.img} /> 
+        <h1>Campus: {this.props.campus.name}</h1>
+        <h4 className="Address">
+        Description :{this.props.campus.info}
+        <br/>
+        Address: {this.props.campus.address}
+        </h4>
+        <br/>
+        <div className="grid">
         {this.props.campus.students.map( student => {
           return (<StudentView student={student} />)
         })}
+        </div>
+        
       </div>
     )}
 }

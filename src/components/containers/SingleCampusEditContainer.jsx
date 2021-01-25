@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 // import { connect } from 'react-redux';
 import { fetchAllCampuses, updateCampus, fetchAllStudents, updateStudent } from '../../thunks';
 import { NavBarContainer } from "../containers";
+import  '../views/styles/SingleCampus.css'
 /* import {SingleCampusEditView }from '../views' */
 
 

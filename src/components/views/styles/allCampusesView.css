@@ -28,12 +28,28 @@ a {
 .defualt-icon {
   margin-top: 20px;
   width: 75px;
-  height: auto
+  height: auto;
+  cursor: pointer;
 }
 
 h3 {
   margin-top: 3px;
   margin-bottom: 10px;
   line-height: .5;
+  cursor: pointer;
 }
 
+span{
+  padding-left:5px;
+}
+.btn{
+  color:white;
+  cursor: pointer;
+}
+#deleteBtn{
+  background-color: red;
+}
+
+#editBtn{
+  background-color: green;
+}
