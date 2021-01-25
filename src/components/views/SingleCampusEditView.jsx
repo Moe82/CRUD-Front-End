@@ -19,7 +19,6 @@ class SingleCampusContainerEdit extends Component {
     }
   }
 
-
   render(){
     return (
       <div>
@@ -37,7 +36,7 @@ class SingleCampusContainerEdit extends Component {
           </label>
           <br />
           <label>
-            Campus Description: <input name="campusInfo" type="text" value={this.state.campusInfo} onChange={this.handleChange} required/> 
+            Campus Description: <input name="campusInfo" type="text" value={this.state.campusInfo} onChange={this.handleChange} /> 
           </label>
             <br />
           <input class="button" type="submit" value="Save changes" />
@@ -66,11 +65,4 @@ const mapDispatch = dispatch => {
   }
 }
 
-// Type check props;
-// AllCampusesContainer.propTypes = {
-//   allCampuses: PropTypes.array.isRequired,
-//   fetchAllCampuses: PropTypes.func.isRequired
-// }
-
-// Export our store-connected container by default;
 export default connect(mapState, mapDispatch)(SingleCampusContainerEdit);
