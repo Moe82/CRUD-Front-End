@@ -1,7 +1,6 @@
 import axios from "axios";
 
-// local backend server port number
-const PORT = 8090;
+const db_server = "http://ttp-crud-app-backend.herokuapp.com"
 
 // ACTION TYPES;
 const FETCH_ALL_STUDENTS = "FETCH_ALL_STUDENTS";
@@ -31,6 +30,7 @@ const deleteStudentActionCreator = (studentID) => {
   };
 };
 const updateStudentActionCreator = (student) => {
+  console.log("*****", student)  
   return {
     type: UPDATE_STUDENT,
     payload: student,
@@ -43,14 +43,14 @@ const updateStudentActionCreator = (student) => {
 export const fetchAllStudents = () => (dispatch) => {
   console.log("fetching...")
   return axios
-    .get(`http://localhost:${PORT}/api/students`)
+    .get(`${db_server}/api/students`)
     .then((res) => res.data)
     .then((students) => dispatch(fetchAllStudentsActionCreator(students)))
     .catch((err) => console.log(err));
 };
 
 export const addStudent = (student) => (dispatch) => {
-  axios.post(`http://localhost:${PORT}/api/students`, {
+  axios.post(`${db_server}/api/students`, {
       firstName: student.studentFirstName,
       lastName: student.studentLastName,
       email: student.studentEmail,
@@ -66,7 +66,7 @@ export const addStudent = (student) => (dispatch) => {
 
 export const deleteStudent = (studentID) => (dispatch) => {
   console.log(studentID)
-  return axios.delete(`http://localhost:${PORT}/api/students`, {
+  return axios.delete(`${db_server}/api/students`, {
       data: {
         id: studentID,
       },
@@ -79,7 +79,7 @@ export const deleteStudent = (studentID) => (dispatch) => {
 export const updateStudent = (student) => (dispatch) => {
   console.log("__________", student)
   return axios
-    .put(`http://localhost:${PORT}/api/students`, { student })
+    .put(`${db_server}/api/students`, { student })
     .then((response) => {
       dispatch(updateStudentActionCreator(response.data));
     })

@@ -15,11 +15,13 @@ class SingleCampusContainerEdit extends Component {
       campusAddress: props.campusAddress,
       campusImgURL: props.campusImgURL,
       campusInfo: props.campusInfo,
-      numberOfStudents: 0
     }
   }
 
   render(){
+    {console.log("HERE_________", this.state.campusInfo.students)}
+    {console.log("test test ")}
+    
     return (
       <div>
         <form onSubmit={this.handleSubmit} class="user-input">

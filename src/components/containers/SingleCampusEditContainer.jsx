@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import { fetchAllCampuses, updateCampus, fetchAllStudents, updateStudent } from '../../thunks';
 import { NavBarContainer } from "../containers";
 /* import {SingleCampusEditView }from '../views' */
+import { withRouter } from "react-router";
+
 
 
 class SingleCampusContainerEdit extends Component {
@@ -15,7 +17,6 @@ class SingleCampusContainerEdit extends Component {
       campusAddress: "",
       campusImgURL: "",
       campusInfo: "",
-      numberOfStudents: 0,
       studentId: ""
     }
   }
@@ -44,6 +45,7 @@ class SingleCampusContainerEdit extends Component {
       info: this.state.campusInfo,
       id: parseInt(this.props.match.params.id)
     })
+    this.props.history.push(`/campuses/${parseInt(this.props.match.params.id)}`)
   } 
 
   handleAddStudent = (event) => {
@@ -52,6 +54,8 @@ class SingleCampusContainerEdit extends Component {
       campusId : parseInt(this.props.match.params.id),
       studentId : this.state.studentId
     })
+    let campusId = parseInt(this.props.match.params.id)
+    this.props.history.push(`/campuses/${parseInt(this.props.match.params.id)}`)
   } 
 
   handleChange = (event) => { this.setState({ [event.target.name]: event.target.value }) }
@@ -93,10 +97,10 @@ class SingleCampusContainerEdit extends Component {
         </form>
         <div>
         </div>
-        
         <br/>
-        {(this.state.numberOfStudents === 0)? <div>There are no student currently registered to this campus.</div> :
-        <div>There are {this.state.numberOfStudents} in this campus.</div>}
+        {/* {console.log (this.props.allCampuses.find(campus => { campus.id == this.props.match.params.id}))} */}
+        {(this.props.allStudents.length === 0)? <div>There are no students currently registered at this campus.</div> :
+        <div>There are {this.props.allStudents.length} students registered at this campus.</div>}
       </div>
     )
   }
@@ -127,4 +131,4 @@ const mapDispatch = dispatch => {
 // }
 
 // Export our store-connected container by default;
-export default connect(mapState, mapDispatch)(SingleCampusContainerEdit);
+export default withRouter(connect(mapState, mapDispatch)(SingleCampusContainerEdit));

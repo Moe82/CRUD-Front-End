@@ -10,7 +10,6 @@ const UPDATE_CAMPUS = "UPDATE_CAMPUS";
 
 // ACTION CREATORS;
 const fetchAllCampusesActionCreator = (campuses) => {
- 
   return {
     type: FETCH_ALL_CAMPUSES,
     payload: campuses.campuses,
@@ -25,7 +24,6 @@ const deleteCampusActionCreator = (campusID) => {
 };
 
 const addCampusActionCreator = (campus) => {
-  
   campus.students = []
   return {
     type: ADD_CAMPUS,
